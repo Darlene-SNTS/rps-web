@@ -90,18 +90,18 @@ var totalImages = 0;
 
 var projectImages = {
   southwoods: [
-    "images/Projects/southwoods 1.jpg",
-    "images/Projects/southwoods 2.jpg",
-    "images/Projects/southwoods 3.jpg",
-    "images/Projects/southwoods 4.jpg",
-    "images/Projects/southwoods 5.jpg",
-    "images/Projects/southwoods 6.jpg",
-    "images/Projects/southwoods 7.jpg",
-    "images/Projects/southwoods 8.jpg",
-    "images/Projects/southwoods 9.jpg",
-    "images/Projects/southwoods 10.jpg",
-    "images/Projects/southwoods 11.jpg",
-    "images/Projects/southwoods 12.jpg",
+    "Images/Projects/southwoods 1.jpg",
+    "Images/Projects/southwoods 2.jpg",
+    "Images/Projects/southwoods 3.jpg",
+    "Images/Projects/southwoods 4.jpg",
+    "Images/Projects/southwoods 5.jpg",
+    "Images/Projects/southwoods 6.jpg",
+    "Images/Projects/southwoods 7.jpg",
+    "Images/Projects/southwoods 8.jpg",
+    "Images/Projects/southwoods 9.jpg",
+    "Images/Projects/southwoods 10.jpg",
+    "Images/Projects/southwoods 11.jpg",
+    "Images/Projects/southwoods 12.jpg",
 
   ],
 
@@ -456,4 +456,5 @@ if (contactForm) {
       });
     });
   
+
   })();
