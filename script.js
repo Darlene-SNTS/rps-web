@@ -271,21 +271,21 @@ var projectImages = {
   ],
 
   varkitchen: [
-    "images/var/21.jpg",
-    "images/var/1.jpg",
-    "images/var/23.jpg",
-    "images/var/9.jpg",
-    "images/var/16.jpg",
-    "images/Bathroom/park ridge state 4.jpg",
-    "images/kitchen/ayala alabang 1.jpg",
-    "images/kitchen/ayala alabang 2.jpg",
-    "images/kitchen/ayala alabang 3.jpg",
-    "images/kitchen/ayala alabang 4.jpg",
-    "images/kitchen/ayala alabang 5.jpg",
-    "images/kitchen/ayala alabang 6.jpg",
-    "images/kitchen/ayala alabang 7.jpg",
-    "images/kitchen/susana heights village 5.jpg",
-    "images/kitchen/susana heights village 6.jpg",
+    "Images/var/21.jpg",
+    "Images/var/1.jpg",
+    "Images/var/23.jpg",
+    "Images/var/9.jpg",
+    "Images/var/16.jpg",
+    "Images/Bathroom/park ridge state 4.jpg",
+    "Images/kitchen/ayala alabang 1.jpg",
+    "Images/kitchen/ayala alabang 2.jpg",
+    "Images/kitchen/ayala alabang 3.jpg",
+    "Images/kitchen/ayala alabang 4.jpg",
+    "Images/kitchen/ayala alabang 5.jpg",
+    "Images/kitchen/ayala alabang 6.jpg",
+    "Images/kitchen/ayala alabang 7.jpg",
+    "Images/kitchen/susana heights village 5.jpg",
+    "Images/kitchen/susana heights village 6.jpg",
 
   ],
 
@@ -458,3 +458,4 @@ if (contactForm) {
   
 
   })();
+
