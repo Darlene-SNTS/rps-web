@@ -426,6 +426,7 @@ var zoomClose = document.querySelector(".zoom-close");
 
 var zoomIndex = 0;
 var currentZoomImages = [];
+var zoomStartX = 0;
 
 /* -------- CLICK IMAGE TO OPEN ZOOM -------- */
 
@@ -442,42 +443,44 @@ modalTrack.addEventListener("click", function (e) {
   }
 });
 
-/* -------- UPDATE IMAGE FUNCTION (MOVED OUTSIDE) -------- */
+/* -------- UPDATE IMAGE -------- */
 
 function updateZoomImage() {
   if (!currentZoomImages.length) return;
+
   zoomImage.src = currentZoomImages[zoomIndex].src;
 }
 
-/* -------- SWIPE SUPPORT -------- */
-
-var zoomStartX = 0;
-var zoomEndX = 0;
+/* -------- MOBILE SWIPE SUPPORT -------- */
 
 zoomOverlay.addEventListener("touchstart", function (e) {
   zoomStartX = e.touches[0].clientX;
 });
 
 zoomOverlay.addEventListener("touchend", function (e) {
-  zoomEndX = e.changedTouches[0].clientX;
-  handleZoomSwipe();
-});
 
-function handleZoomSwipe() {
-
+  var zoomEndX = e.changedTouches[0].clientX;
   var distance = zoomStartX - zoomEndX;
 
-  if (Math.abs(distance) > 50) {
+  // Ignore very small swipes
+  if (Math.abs(distance) < 40) return;
 
-    if (distance > 0 && zoomIndex < currentZoomImages.length - 1) {
+  // Swipe LEFT → Next image
+  if (distance > 0) {
+    if (zoomIndex < currentZoomImages.length - 1) {
       zoomIndex++;
-    } else if (distance < 0 && zoomIndex > 0) {
-      zoomIndex--;
+      updateZoomImage();
     }
-
-    updateZoomImage();
   }
-}
+
+  // Swipe RIGHT → Previous image
+  if (distance < 0) {
+    if (zoomIndex > 0) {
+      zoomIndex--;
+      updateZoomImage();
+    }
+  }
+});
 
 /* -------- KEYBOARD SUPPORT -------- */
 
@@ -485,7 +488,9 @@ document.addEventListener("keydown", function (e) {
 
   if (zoomOverlay.style.display === "flex") {
 
-    if (e.key === "Escape") closeZoom();
+    if (e.key === "Escape") {
+      closeZoom();
+    }
 
     if (e.key === "ArrowRight" && zoomIndex < currentZoomImages.length - 1) {
       zoomIndex++;
@@ -499,12 +504,14 @@ document.addEventListener("keydown", function (e) {
   }
 });
 
-/* -------- CLOSE -------- */
+/* -------- CLOSE EVENTS -------- */
 
 zoomClose.addEventListener("click", closeZoom);
 
 zoomOverlay.addEventListener("click", function (e) {
-  if (e.target === zoomOverlay) closeZoom();
+  if (e.target === zoomOverlay) {
+    closeZoom();
+  }
 });
 
 function closeZoom() {
@@ -582,6 +589,7 @@ if (contactForm) {
   
 
   })();
+
 
 
 
