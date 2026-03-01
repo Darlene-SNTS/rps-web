@@ -347,26 +347,67 @@ galleryItems.forEach(function (item) {
 });
 
 function updateCarousel() {
-  var imageWidth = modalTrack.querySelector("img").offsetWidth + 20;
+
+  var firstImg = modalTrack.querySelector("img");
+  if (!firstImg) return;
+
+  var imageWidth = firstImg.offsetWidth + 20;
   modalTrack.style.transform =
     "translateX(-" + (currentIndex * imageWidth) + "px)";
+
+  var maxIndex = Math.max(totalImages - imagesPerView, 0);
+
+  // Disable arrows visually
+  leftArrow.style.opacity = currentIndex === 0 ? "0.4" : "1";
+  rightArrow.style.opacity = currentIndex >= maxIndex ? "0.4" : "1";
 }
 
 rightArrow.addEventListener("click", function () {
-  currentIndex += imagesPerView;
-  if (currentIndex >= totalImages) {
-    currentIndex = 0; // infinite loop
+
+  var maxIndex = Math.max(totalImages - imagesPerView, 0);
+
+  if (currentIndex < maxIndex) {
+    currentIndex += imagesPerView;
+    updateCarousel();
   }
-  updateCarousel();
 });
 
 leftArrow.addEventListener("click", function () {
-  currentIndex -= imagesPerView;
-  if (currentIndex < 0) {
-    currentIndex = Math.max(totalImages - imagesPerView, 0);
+
+  if (currentIndex > 0) {
+    currentIndex -= imagesPerView;
+    updateCarousel();
   }
-  updateCarousel();
 });
+
+    var startX = 0;
+var endX = 0;
+
+modalTrack.addEventListener("touchstart", function (e) {
+  startX = e.touches[0].clientX;
+});
+
+modalTrack.addEventListener("touchend", function (e) {
+  endX = e.changedTouches[0].clientX;
+  handleSwipe();
+});
+
+function handleSwipe() {
+
+  var swipeDistance = startX - endX;
+  var maxIndex = Math.max(totalImages - imagesPerView, 0);
+
+  if (Math.abs(swipeDistance) > 50) {
+
+    if (swipeDistance > 0 && currentIndex < maxIndex) {
+      currentIndex += imagesPerView;
+    } else if (swipeDistance < 0 && currentIndex > 0) {
+      currentIndex -= imagesPerView;
+    }
+
+    updateCarousel();
+  }
+}
 
 modalClose.addEventListener("click", closeModal);
 
@@ -475,6 +516,7 @@ if (contactForm) {
   
 
   })();
+
 
 
 
