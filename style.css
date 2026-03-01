@@ -1009,4 +1009,32 @@ footer { background: #12100E; padding: 72px 0 36px; color: rgba(255,255,255,0.55
 
 .gallery-item:hover .gallery-overlay {
   opacity: 1;              /* remove hover behavior */
+
+}
+
+.form-message {
+  margin-top: 20px;
+  padding: 14px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.form-message.success {
+  background: #e8f7ee;
+  color: #1f7a3e;
+  border: 1px solid #b7e4c7;
+}
+
+.form-message.error {
+  background: #fdecea;
+  color: #a12622;
+  border: 1px solid #f5c6cb;
+}
+
+.form-message.show {
+  display: block;
+  opacity: 1;
 }
