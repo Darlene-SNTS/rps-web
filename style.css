@@ -1038,3 +1038,10 @@ footer { background: #12100E; padding: 72px 0 36px; color: rgba(255,255,255,0.55
   display: block;
   opacity: 1;
 }
+
+#modalTrack {
+  display: flex;
+  transition: transform 0.4s ease;
+  touch-action: pan-y;
+}
+
