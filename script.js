@@ -424,13 +424,82 @@ var zoomOverlay = document.getElementById("zoomOverlay");
 var zoomImage = document.getElementById("zoomImage");
 var zoomClose = document.querySelector(".zoom-close");
 
-// Click image inside carousel
+var zoomIndex = 0;
+var currentZoomImages = [];
+
+/* -------- CLICK IMAGE TO OPEN ZOOM -------- */
+
 modalTrack.addEventListener("click", function (e) {
   if (e.target.tagName === "IMG") {
-    zoomImage.src = e.target.src;
+
+    currentZoomImages = Array.from(modalTrack.querySelectorAll("img"));
+    zoomIndex = currentZoomImages.indexOf(e.target);
+
+    updateZoomImage();
+
     zoomOverlay.style.display = "flex";
+    document.body.style.overflow = "hidden";
   }
 });
+
+/* -------- UPDATE IMAGE FUNCTION (MOVED OUTSIDE) -------- */
+
+function updateZoomImage() {
+  if (!currentZoomImages.length) return;
+  zoomImage.src = currentZoomImages[zoomIndex].src;
+}
+
+/* -------- SWIPE SUPPORT -------- */
+
+var zoomStartX = 0;
+var zoomEndX = 0;
+
+zoomOverlay.addEventListener("touchstart", function (e) {
+  zoomStartX = e.touches[0].clientX;
+});
+
+zoomOverlay.addEventListener("touchend", function (e) {
+  zoomEndX = e.changedTouches[0].clientX;
+  handleZoomSwipe();
+});
+
+function handleZoomSwipe() {
+
+  var distance = zoomStartX - zoomEndX;
+
+  if (Math.abs(distance) > 50) {
+
+    if (distance > 0 && zoomIndex < currentZoomImages.length - 1) {
+      zoomIndex++;
+    } else if (distance < 0 && zoomIndex > 0) {
+      zoomIndex--;
+    }
+
+    updateZoomImage();
+  }
+}
+
+/* -------- KEYBOARD SUPPORT -------- */
+
+document.addEventListener("keydown", function (e) {
+
+  if (zoomOverlay.style.display === "flex") {
+
+    if (e.key === "Escape") closeZoom();
+
+    if (e.key === "ArrowRight" && zoomIndex < currentZoomImages.length - 1) {
+      zoomIndex++;
+      updateZoomImage();
+    }
+
+    if (e.key === "ArrowLeft" && zoomIndex > 0) {
+      zoomIndex--;
+      updateZoomImage();
+    }
+  }
+});
+
+/* -------- CLOSE -------- */
 
 zoomClose.addEventListener("click", closeZoom);
 
@@ -438,12 +507,9 @@ zoomOverlay.addEventListener("click", function (e) {
   if (e.target === zoomOverlay) closeZoom();
 });
 
-document.addEventListener("keydown", function (e) {
-  if (e.key === "Escape") closeZoom();
-});
-
 function closeZoom() {
   zoomOverlay.style.display = "none";
+  document.body.style.overflow = "";
 }
   
     /* ---- Contact Form Email ---- */
@@ -516,6 +582,7 @@ if (contactForm) {
   
 
   })();
+
 
 
 
