@@ -408,6 +408,7 @@ function closeZoom() {
     /* ---- Contact Form Email ---- */
 
 var contactForm = document.getElementById("contact-form");
+var formMessage = document.getElementById("form-message");
 
 if (contactForm) {
   contactForm.addEventListener("submit", function (e) {
@@ -419,12 +420,28 @@ if (contactForm) {
       contactForm
     )
     .then(function () {
-      alert("Email sent successfully!");
+
+      formMessage.textContent = "Thank you! Your message has been sent successfully. We’ll get back to you shortly.";
+      formMessage.className = "form-message success show";
+
       contactForm.reset();
+
+      setTimeout(function () {
+        formMessage.classList.remove("show");
+      }, 5000);
+
     })
     .catch(function (error) {
-      alert("Failed to send message. Please try again.");
+
+      formMessage.textContent = "Something went wrong. Please try again or contact us directly.";
+      formMessage.className = "form-message error show";
+
       console.log(error);
+
+      setTimeout(function () {
+        formMessage.classList.remove("show");
+      }, 5000);
+
     });
   });
 }
@@ -458,5 +475,6 @@ if (contactForm) {
   
 
   })();
+
 
 
