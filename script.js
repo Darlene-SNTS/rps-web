@@ -397,13 +397,27 @@ function handleSwipe() {
   var swipeDistance = startX - endX;
   var maxIndex = Math.max(totalImages - imagesPerView, 0);
 
-  if (Math.abs(swipeDistance) > 50) {
+  if (Math.abs(swipeDistance) < 40) return;
 
-    if (swipeDistance > 0 && currentIndex < maxIndex) {
-      currentIndex += imagesPerView;
-    } else if (swipeDistance < 0 && currentIndex > 0) {
-      currentIndex -= imagesPerView;
+  // On mobile, move 1 image
+  var step = window.innerWidth <= 768 ? 1 : imagesPerView;
+
+  // Swipe LEFT
+  if (swipeDistance > 0) {
+    if (currentIndex < maxIndex) {
+      currentIndex = Math.min(currentIndex + step, maxIndex);
+      updateCarousel();
     }
+  }
+
+  // Swipe RIGHT
+  if (swipeDistance < 0) {
+    if (currentIndex > 0) {
+      currentIndex = Math.max(currentIndex - step, 0);
+      updateCarousel();
+    }
+  }
+}}
 
     updateCarousel();
   }
@@ -589,6 +603,7 @@ if (contactForm) {
   
 
   })();
+
 
 
 
