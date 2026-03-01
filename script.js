@@ -417,11 +417,6 @@ function handleSwipe() {
       updateCarousel();
     }
   }
-}}
-
-    updateCarousel();
-  }
-}
 
 modalClose.addEventListener("click", closeModal);
 
@@ -603,6 +598,7 @@ if (contactForm) {
   
 
   })();
+
 
 
 
