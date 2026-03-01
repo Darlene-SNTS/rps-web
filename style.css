@@ -997,6 +997,10 @@ footer { background: #12100E; padding: 72px 0 36px; color: rgba(255,255,255,0.55
   cursor: pointer;
 }
 
+.zoom-overlay.active {
+  display: flex;
+}
+
 .gallery-overlay {
   position: absolute;
   bottom: 0;
@@ -1044,4 +1048,5 @@ footer { background: #12100E; padding: 72px 0 36px; color: rgba(255,255,255,0.55
   transition: transform 0.4s ease;
   touch-action: pan-y;
 }
+
 
