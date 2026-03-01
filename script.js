@@ -399,24 +399,21 @@ function handleSwipe() {
 
   if (Math.abs(swipeDistance) < 40) return;
 
-  // On mobile, move 1 image
+  // On mobile move 1, desktop move 3
   var step = window.innerWidth <= 768 ? 1 : imagesPerView;
 
   // Swipe LEFT
-  if (swipeDistance > 0) {
-    if (currentIndex < maxIndex) {
-      currentIndex = Math.min(currentIndex + step, maxIndex);
-      updateCarousel();
-    }
+  if (swipeDistance > 0 && currentIndex < maxIndex) {
+    currentIndex = Math.min(currentIndex + step, maxIndex);
+    updateCarousel();
   }
 
   // Swipe RIGHT
-  if (swipeDistance < 0) {
-    if (currentIndex > 0) {
-      currentIndex = Math.max(currentIndex - step, 0);
-      updateCarousel();
-    }
+  else if (swipeDistance < 0 && currentIndex > 0) {
+    currentIndex = Math.max(currentIndex - step, 0);
+    updateCarousel();
   }
+}
 
 modalClose.addEventListener("click", closeModal);
 
@@ -598,6 +595,7 @@ if (contactForm) {
   
 
   })();
+
 
 
 
